@@ -32,7 +32,8 @@ namespace ExceptionHandlingExercise
                         // Now, using int.Parse, parse your string variable and store in an int variable
                         // Then add each int to your list
                 
-                // in your () of your catch, 
+                // catch your Exception:
+                // in the scope of your catch you can use the following, 
                 
                     //Console.WriteLine($"Unable to Parse '{character}'"); //character will be the name of each item in your collection
                 
