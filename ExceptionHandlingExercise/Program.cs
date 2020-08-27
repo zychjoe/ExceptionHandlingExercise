@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace ExceptionHandlingExercise
 {
@@ -9,35 +10,46 @@ namespace ExceptionHandlingExercise
         static void Main(string[] args)
         {
             // First create an char[], it must contain 6 numbers and 3 letters
+            var arr = new char[] { '1', '2', '3', '4', '5', '6', 'a', 'b', 'c' };
+
             // Create a list called numbers
+            var numbers = new List<int>();
+
             // Create an string variable with an empty string initializer
+            var str = "";
 
             // using a foeach loop, attempt to parse the elements in your char[],
-            // Exceptions will be thrown 
+            // Exceptions will be thrown
+            foreach(var letter in arr)
+            {
+                try
+                {
+                    str = letter.ToString();
+                    numbers.Add(int.Parse(str));
+                }
+                catch(Exception e)
+                {
+                    LoggerError(e);
+                }
+            }
+
+            foreach (var num in numbers)
+            {
+                Console.WriteLine(num);
+            }
+        }
 
 
+        static void LoggerError(Exception error)
+        {
+            StringBuilder sb = new StringBuilder();
 
+            sb.Append($"{Environment.NewLine}-------------------------{Environment.NewLine}");
+            sb.Append($"{error.Message} {DateTime.Now}");
+            sb.Append($"{Environment.NewLine}-------------------------{Environment.NewLine}");
+            var filePath = "";
 
-            // Make a foreach loop to iterate through your character array
-            
-                // Now create a try catch
-                
-                
-                    // Inside your try block
-                        // set your string variable to each array element in your char[] to .ToString()
-                        // Now, using int.Parse, parse your string variable and store in an int variable
-                        // Then add each int to your list
-                
-                // in your () of your catch, 
-                
-                    //Console.WriteLine($"Unable to Parse '{character}'");
-                
-            
-
-            //foreach (var num in numbers)
-            //{
-            //    Console.WriteLine(num);
-            //}
+            File.AppendAllText(filePath + "log.txt", sb.ToString());
         }
     }
 }
